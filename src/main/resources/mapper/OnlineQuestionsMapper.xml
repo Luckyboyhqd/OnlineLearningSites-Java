@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.online.dao.OnlineQuestionsMapper" >
+  <resultMap id="BaseResultMap" type="com.online.entity.OnlineQuestions" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sort_id" property="sortId" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sentence" property="sentence" jdbcType="VARCHAR" />
+    <result column="result_set" property="resultSet" jdbcType="VARCHAR" />
+    <result column="correct_set" property="correctSet" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sort_id, type, status, sentence, result_set, correct_set, user_id, create_time, 
+    remark, other
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.online.entity.OnlineQuestionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from online_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from online_questions
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from online_questions
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.online.entity.OnlineQuestionsExample" >
+    delete from online_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.online.entity.OnlineQuestions" >
+    insert into online_questions (id, sort_id, type, 
+      status, sentence, result_set, 
+      correct_set, user_id, create_time, 
+      remark, other)
+    values (#{id,jdbcType=VARCHAR}, #{sortId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{sentence,jdbcType=VARCHAR}, #{resultSet,jdbcType=VARCHAR}, 
+      #{correctSet,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.online.entity.OnlineQuestions" >
+    insert into online_questions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sortId != null" >
+        sort_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sentence != null" >
+        sentence,
+      </if>
+      <if test="resultSet != null" >
+        result_set,
+      </if>
+      <if test="correctSet != null" >
+        correct_set,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sentence != null" >
+        #{sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="resultSet != null" >
+        #{resultSet,jdbcType=VARCHAR},
+      </if>
+      <if test="correctSet != null" >
+        #{correctSet,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.online.entity.OnlineQuestionsExample" resultType="java.lang.Integer" >
+    select count(*) from online_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update online_questions
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortId != null" >
+        sort_id = #{record.sortId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.sentence != null" >
+        sentence = #{record.sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultSet != null" >
+        result_set = #{record.resultSet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.correctSet != null" >
+        correct_set = #{record.correctSet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.other != null" >
+        other = #{record.other,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update online_questions
+    set id = #{record.id,jdbcType=VARCHAR},
+      sort_id = #{record.sortId,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      sentence = #{record.sentence,jdbcType=VARCHAR},
+      result_set = #{record.resultSet,jdbcType=VARCHAR},
+      correct_set = #{record.correctSet,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      other = #{record.other,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.online.entity.OnlineQuestions" >
+    update online_questions
+    <set >
+      <if test="sortId != null" >
+        sort_id = #{sortId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sentence != null" >
+        sentence = #{sentence,jdbcType=VARCHAR},
+      </if>
+      <if test="resultSet != null" >
+        result_set = #{resultSet,jdbcType=VARCHAR},
+      </if>
+      <if test="correctSet != null" >
+        correct_set = #{correctSet,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.online.entity.OnlineQuestions" >
+    update online_questions
+    set sort_id = #{sortId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      sentence = #{sentence,jdbcType=VARCHAR},
+      result_set = #{resultSet,jdbcType=VARCHAR},
+      correct_set = #{correctSet,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--getQuestions-->
+  <select id="getQuestions" resultMap="BaseResultMap" parameterType="com.online.entity.OnlineQuestionsExample" >
+    select
+    <include refid="Base_Column_List" />
+    from online_questions
+    where status = 0
+  </select>
+
+  <!--updateResultSetById-->
+  <update id="updateResultSetById" parameterType="com.online.entity.OnlineQuestions" >
+    update online_questions
+    set
+      result_set = #{resultSet,jdbcType=VARCHAR}
+    where id = #{qid,jdbcType=VARCHAR}
+  </update>
+  <!--getObjBySerntenceAndCorrectSet-->
+  <select id="getObjBySerntenceAndCorrectSet" resultMap="BaseResultMap" parameterType="com.online.entity.OnlineQuestionsExample" >
+    select
+    <include refid="Base_Column_List" />
+    from online_questions
+    where sentence = #{sentence,jdbcType=VARCHAR} and correct_set = #{correctSet,jdbcType=VARCHAR}
+  </select>
+</mapper>
